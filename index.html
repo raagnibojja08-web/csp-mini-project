@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSP Mini Project - Plant Disease Awareness & Management</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --bg: #f4f7f5;
+            --card: #ffffff;
+            --border: #d0d7d2;
+            --text: #222222;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        header h1 {
+            margin: 0;
+            color: var(--primary-dark);
+            font-size: 24px;
+        }
+        header p {
+            margin: 5px 0 0;
+            color: #555;
+            font-weight: 500;
+        }
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+        .tab-btn {
+            padding: 8px 14px;
+            border: 1px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        h2 {
+            color: var(--primary-dark);
+            font-size: 19px;
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e8f5e9;
+            color: var(--primary-dark);
+            font-weight: bold;
+            text-align: center;
+        }
+        .center {
+            text-align: center;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group.full {
+            grid-column: span 2;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button.submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button.submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        .success-box {
+            background-color: #e8f5e9;
+            border: 1px solid var(--primary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+            color: var(--primary-dark);
+            font-weight: bold;
+            text-align: center;
+        }
+        .display-data-card {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>COMMUNITY SERVICE PROJECT (CSP)</h1>
+        <p>Topic: Plant Disease Identification, Soil Health & Organic Awareness (30-06-2025 to 09-08-2025)</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="showTab('index', this)">Project Index</button>
+        <button class="tab-btn" onclick="showTab('week1', this)">Week 1</button>
+        <button class="tab-btn" onclick="showTab('week2', this)">Week 2</button>
+        <button class="tab-btn" onclick="showTab('week3', this)">Week 3</button>
+        <button class="tab-btn" onclick="showTab('week4', this)">Week 4</button>
+        <button class="tab-btn" onclick="showTab('week5', this)">Week 5</button>
+        <button class="tab-btn" onclick="showTab('week6', this)">Week 6</button>
+        <button class="tab-btn" onclick="showTab('upload', this)">Upload Details & Files</button>
+        <button class="tab-btn" onclick="showTab('viewData', this)">View My Saved Data</button>
+    </div>
+
+    <!-- INDEX SECTION -->
+    <div id="index" class="section active">
+        <h2>Index</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 80%;">CONTENTS</th>
+                    <th style="width: 20%;">PAGE NO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1. EXECUTION SUMMARY</td><td class="center">10</td></tr>
+                <tr><td>2. OVERVIEW OF THE COMMUNITY</td><td class="center">11</td></tr>
+                <tr><td>3. COMMUNITY SERVICE PROJECT</td><td class="center">12</td></tr>
+                <tr><td>4. ACTIVITY LOG BOOK FOR FIRST WEEK</td><td class="center">13</td></tr>
+                <tr><td>5. ACTIVITY LOG BOOK FOR SECOND WEEK</td><td class="center">15</td></tr>
+                <tr><td>6. ACTIVITY LOG BOOK FOR THIRD WEEK</td><td class="center">17</td></tr>
+                <tr><td>7. ACTIVITY LOG BOOK FOR FOURTH WEEK</td><td class="center">19</td></tr>
+                <tr><td>8. ACTIVITY LOG BOOK FOR FIFTH WEEK</td><td class="center">21</td></tr>
+                <tr><td>9. ACTIVITY LOG BOOK FOR SIXTH WEEK</td><td class="center">23</td></tr>
+                <tr><td>10. OUTCOMES DESCRIPTION</td><td class="center">23</td></tr>
+                <tr><td>11. PROBLEMS IDENTIFIED IN THE COMMUNITY</td><td class="center">25</td></tr>
+                <tr><td>12. SHORT-TERM AND LONG-TERM ACTION PLANS</td><td class="center">26</td></tr>
+                <tr><td>13. DESCRIPTION OF COMMUNITY AWARENESS PROGRAM</td><td class="center">27</td></tr>
+                <tr><td>14. REPORT OF MINI PROJECT</td><td class="center">28</td></tr>
+                <tr><td>15. RECOMMENDATION AND CONCLUSION OF MINI PROJECT</td><td class="center">29</td></tr>
+                <tr><td>16. STUDENT SELF EVALUATION</td><td class="center">34</td></tr>
+                <tr><td>17. EVALUATION BY THE PERSON IN-CHARGE</td><td class="center">36</td></tr>
+                <tr><td>18. PHOTOS OF THE PROJECT</td><td class="center">37</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div id="week1" class="section">
+        <h2>Activity Log for the First Week</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">DAY & DATE</th>
+                    <th style="width: 38%;">BRIEF DESCRIPTION OF THE DAILY ACTIVITY</th>
+                    <th style="width: 35%;">LEARNING OUTCOME</th>
+                    <th style="width: 12%;">Person In-charge Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><strong>DAY-1</strong><br>30-06-25</td>
+                    <td>Orientation about the project and introduction to plant diseases.</td>
+                    <td>Orientation about the project and introduction to plant diseases.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-2</strong><br>1-07-25</td>
+                    <td>Visit to the plantation area to observe different plants.</td>
+                    <td>Learned to observe plant structures and identify healthy growth patterns.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-3</strong><br>2-07-25</td>
+                    <td>Identify healthy and diseased plants in the field.</td>
+                    <td>Developed skills to differentiate diseased plants by visual symptoms.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-4</strong><br>3-07-25</td>
+                    <td>Collect diseased leaf and stem samples for study.</td>
+                    <td>Learned proper techniques of collecting and handling plant samples.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-5</strong><br>4-07-25</td>
+                    <td>Take photographs and record disease symptoms such as wilting, spots, or yellowing.</td>
+                    <td>Gained experience in recording and documenting field observations accurately.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-6</strong><br>5-07-25</td>
+                    <td>Discuss findings with local farmers and prepare observation notes.</td>
+                    <td>Improved communication skills and understood farmers' experiences with plant diseases.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div id="week2" class="section">
+        <h2>Activity Log Book for Second Week</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">DAY & DATE</th>
+                    <th style="width: 38%;">BRIEF DESCRIPTION OF THE DAILY ACTIVITY</th>
+                    <th style="width: 35%;">LEARNING OUTCOME</th>
+                    <th style="width: 12%;">Person In-charge Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><strong>DAY-1</strong><br>7-07-2025</td>
+                    <td>Study major plant diseases (fungal, bacterial, and viral).</td>
+                    <td>Understood different types of plant diseases and their causes.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-2</strong><br>8-07-2025</td>
+                    <td>Note the symptoms and visible signs of each disease type.</td>
+                    <td>Learned how to identify diseases through external plant symptoms.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-3</strong><br>9-07-2025</td>
+                    <td>Group discussion on classification of diseases by cause and symptom.</td>
+                    <td>Enhanced teamwork and analytical skills through collaborative study.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-4</strong><br>10-07-2025</td>
+                    <td>Visit to nearby nursery or agriculture department for expert advice.</td>
+                    <td>Gained real-world knowledge from agricultural experts about disease management.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-5</strong><br>11-07-2025</td>
+                    <td>Label and organize collected samples for easy identification.</td>
+                    <td>Learned systematic documentation and labeling techniques.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-6</strong><br>12-07-2025</td>
+                    <td>Prepare a disease identification chart for project records.</td>
+                    <td>Developed visual presentation and summarization skills for technical information.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div id="week3" class="section">
+        <h2>Activity Log for the Third Week</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">DAY & DATE</th>
+                    <th style="width: 38%;">BRIEF DESCRIPTION OF THE DAILY ACTIVITY</th>
+                    <th style="width: 35%;">LEARNING OUTCOME</th>
+                    <th style="width: 12%;">Person In-charge Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><strong>DAY-1</strong><br>14-07-2025</td>
+                    <td>Select affected plots for soil sampling.</td>
+                    <td>Learned how to identify test areas for soil collection.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-2</strong><br>15-07-2025</td>
+                    <td>Collect soil samples from healthy and diseased zones.</td>
+                    <td>Learned how to identify test areas for soil collection.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-3</strong><br>16-07-2025</td>
+                    <td>Conduct soil pH and moisture testing using basic kits.</td>
+                    <td>Collect soil samples from healthy and diseased zones.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-4</strong><br>17-07-2025</td>
+                    <td>Record soil fertility, texture, and nutrient data.</td>
+                    <td>Learned the link between soil quality and disease occurrence.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-5</strong><br>18-07-2025</td>
+                    <td>Analyze connection between soil health and plant infection rate.</td>
+                    <td>Understood how poor soil conditions contribute to disease spread.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-6</strong><br>19-07-2025</td>
+                    <td>Prepare soil test summary and share findings with group.</td>
+                    <td>Prepare soil test summary and share findings with group.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div id="week4" class="section">
+        <h2>Activity Log for the Fourth Week</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">DAY & DATE</th>
+                    <th style="width: 38%;">BRIEF DESCRIPTION OF THE DAILY ACTIVITY</th>
+                    <th style="width: 35%;">LEARNING OUTCOME</th>
+                    <th style="width: 12%;">Person In-charge Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><strong>DAY-1</strong><br>21-07-2025</td>
+                    <td>Research on environmental factors influencing disease spread.</td>
+                    <td>Learned how temperature, humidity, and rainfall affect plant health.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-2</strong><br>22-07-2025</td>
+                    <td>Identify biological and chemical causes of infection.</td>
+                    <td>Gained knowledge about microbes responsible for plant diseases.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-3</strong><br>23-07-2025</td>
+                    <td>Demonstrate natural control measures like neem oil and compost use.</td>
+                    <td>Gained knowledge about microbes responsible for plant diseases.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-4</strong><br>24-07-2025</td>
+                    <td>Apply preventive measures to selected plants and observe changes.</td>
+                    <td>Experienced the effectiveness of preventive care in real conditions.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-5</strong><br>25-07-2025</td>
+                    <td>Apply preventive measures to selected plants and observe changes.</td>
+                    <td>Experienced the effectiveness of preventive care in real conditions.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-6</strong><br>26-07-2025</td>
+                    <td>Discuss with farmers about prevention methods used locally.</td>
+                    <td>Experienced the effectiveness of preventive care in real conditions.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- WEEK 5 -->
+    <div id="week5" class="section">
+        <h2>Activity Log for the Fifth Week</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">DAY & DATE</th>
+                    <th style="width: 38%;">BRIEF DESCRIPTION OF THE DAILY ACTIVITY</th>
+                    <th style="width: 35%;">LEARNING OUTCOME</th>
+                    <th style="width: 12%;">Person In-charge Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><strong>DAY-1</strong><br>28-07-2025</td>
+                    <td>Select diseased plants for applying treatments.</td>
+                    <td>Learned to choose suitable samples for experimental treatment.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-2</strong><br>29-07-2025</td>
+                    <td>Prepare organic pesticide mixtures and apply on affected plants.</td>
+                    <td>Gained hands-on experience in preparing and applying organic pesticides safely.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-3</strong><br>30-07-2025</td>
+                    <td>Observe early signs of improvement after treatment.</td>
+                    <td>Understood how to monitor and record plant recovery progress.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-4</strong><br>31-07-2025</td>
+                    <td>Record visible improvements and compare with control plants.</td>
+                    <td>Enhanced observation and comparative analysis skills.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-5</strong><br>1-08-2025</td>
+                    <td>Take photos and measure leaf recovery or new growth.</td>
+                    <td>Learned to document treatment results visually for project evidence.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-6</strong><br>2-08-2025</td>
+                    <td>Discuss treatment effectiveness and prepare weekly summary.</td>
+                    <td>Discuss treatment effectiveness and prepare weekly summary.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- WEEK 6 -->
+    <div id="week6" class="section">
+        <h2>Activity Log for the Sixth Week</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">DAY & DATE</th>
+                    <th style="width: 38%;">BRIEF DESCRIPTION OF THE DAILY ACTIVITY</th>
+                    <th style="width: 35%;">LEARNING OUTCOME</th>
+                    <th style="width: 12%;">Person In-charge Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center"><strong>DAY-1</strong><br>4-08-2025</td>
+                    <td>Design posters and pamphlets about plant disease awareness.</td>
+                    <td>Design posters and pamphlets about plant disease awareness.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-2</strong><br>5-08-2025</td>
+                    <td>Conduct awareness sessions for local farmers.</td>
+                    <td>Design posters and pamphlets about plant disease awareness.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-3</strong><br>6-08-2025</td>
+                    <td>Explain preventive methods to community members.</td>
+                    <td>Enhanced teaching and knowledge-sharing skills.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-4</strong><br>7-08-2025</td>
+                    <td>Demonstrate natural treatments for plants during session.</td>
+                    <td>Demonstrate natural treatments for plants during session.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-5</strong><br>8-08-2025</td>
+                    <td>Collect community feedback and document responses.</td>
+                    <td>Learned to collect, analyze, and record stakeholder opinions.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="center"><strong>DAY-6</strong><br>9-08-2025</td>
+                    <td>Prepare report on awareness activity and outcomes.</td>
+                    <td>Gained reporting and reflection experience on community engagement.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- UPLOAD DETAILS & DOCUMENTS SECTION -->
+    <div id="upload" class="section">
+        <h2>Upload Student Details & Project Files</h2>
+        <div id="successMessage" class="success-box">Data successfully saved and stored in your browser! Click "View My Saved Data" to review.</div>
+        
+        <form id="cspForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rollNo">Roll Number</label>
+                    <input type="text" id="rollNo" name="rollNo" placeholder="Enter your Roll Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="communityArea">Surveyed Village / Plantation Area</label>
+                    <input type="text" id="communityArea" name="communityArea" placeholder="Enter location name" required>
+                </div>
+                <div class="form-group">
+                    <label for="inchargeName">Person In-Charge / Mentor Name</label>
+                    <input type="text" id="inchargeName" name="inchargeName" placeholder="Enter mentor/in-charge name" required>
+                </div>
+                <div class="form-group full">
+                    <label for="problemsIdentified">Problems Identified & Action Plan Summary (Pages 25–26)</label>
+                    <textarea id="problemsIdentified" name="problemsIdentified" rows="3" placeholder="Summarize fungal/bacterial issues, soil pH findings, and neem oil/organic treatment outcomes..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectReportName">Report File Name</label>
+                    <input type="text" id="projectReportName" name="projectReportName" placeholder="e.g., CSP_Final_Report.pdf" required>
+                </div>
+                <div class="form-group">
+                    <label for="photoFilesName">Photos / Evidence File Name</label>
+                    <input type="text" id="photoFilesName" name="photoFilesName" placeholder="e.g., Photos_Page37.zip" required>
+                </div>
+            </div>
+            <button type="button" class="submit-btn" onclick="saveCSPData()">Save & Display Data</button>
+        </form>
+    </div>
+
+    <!-- VIEW SAVED DATA SECTION -->
+    <div id="viewData" class="section">
+        <h2>Your Saved Project Details</h2>
+        <div id="savedDataDisplay" class="display-data-card">
+            <p>No details saved yet. Please fill out the form under the "Upload Details & Files" tab and click "Save & Display Data".</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(sectionId, btn) {
+        document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        btn.classList.add('active');
+        if (sectionId === 'viewData') {
+            loadSavedData();
+        }
+    }
+
+    function saveCSPData() {
+        const formData = {
+            studentName: document.getElementById('studentName').value,
+            rollNo: document.getElementById('rollNo').value,
+            communityArea: document.getElementById('communityArea').value,
+            inchargeName: document.getElementById('inchargeName').value,
+            problemsIdentified: document.getElementById('problemsIdentified').value,
+            projectReportName: document.getElementById('projectReportName').value,
+            photoFilesName: document.getElementById('photoFilesName').value,
+            savedDate: new Date().toLocaleString()
+        };
+
+        if(!formData.studentName || !formData.rollNo) {
+            alert('Please fill in at least your name and roll number.');
+            return;
+        }
+
+        localStorage.setItem('cspProjectData', JSON.stringify(formData));
+        
+        document.getElementById('successMessage').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('successMessage').style.display = 'none';
+        }, 4000);
+    }
+
+    function loadSavedData() {
+        const dataStr = localStorage.getItem('cspProjectData');
+        const displayDiv = document.getElementById('savedDataDisplay');
+        
+        if (!dataStr) {
+            displayDiv.innerHTML = '<p>No details saved yet. Please fill out the form under the "Upload Details & Files" tab and click "Save & Display Data".</p>';
+            return;
+        }
+
+        const data = JSON.parse(dataStr);
+        displayDiv.innerHTML = `
+            <p><strong>Saved On:</strong> ${data.savedDate}</p>
+            <p><strong>Student Name:</strong> ${data.studentName}</p>
+            <p><strong>Roll Number:</strong> ${data.rollNo}</p>
+            <p><strong>Surveyed Area:</strong> ${data.communityArea}</p>
+            <p><strong>Mentor / In-Charge:</strong> ${data.inchargeName}</p>
+            <p><strong>Problems & Action Plan Summary:</strong><br>${data.problemsIdentified}</p>
+            <p><strong>Report File:</strong> ${data.projectReportName}</p>
+            <p><strong>Photos File:</strong> ${data.photoFilesName}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
